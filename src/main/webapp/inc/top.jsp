@@ -6,7 +6,7 @@
 	id="ftco-navbar">
 	<div class="container">
 		<!-- 	      <a class="navbar-brand" href="index.html">Car<span>Book</span></a> -->
-		<a href="./index.jsp"> <img src="../images/logo.png" width="100" height="50">
+		<a href="./index.jsp"> <img src="./images/logo.png" width="100" height="50">
 		</a>
 		<button 
 			class="navbar-toggler" type="button" data-toggle="collapse"
