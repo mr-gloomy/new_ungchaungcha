@@ -33,7 +33,7 @@
 	
 	<script type="text/javascript">
 	
-	function insertBoard(seq){
+	function updateBoard(seq){
 		Swal.fire({
 		  title: '글을 수정하시겠습니까?',
 		  // text: "삭제하시면 다시 복구시킬 수 없습니다.",
@@ -51,6 +51,9 @@
 		})
 	}
 	
+	function back(){
+		history.back();
+	}
 
 	</script>
 </head>
@@ -185,7 +188,10 @@
 <!-- 			  </label> -->
 			  
 			  <div class="form-group">
-                <input type="button" value="수정" class="btn btn-primary py-2 px-4"  onclick="insertBoard()"> <input type="reset" value="초기화" class="btn btn-primary py-2 px-4" >
+                <input type="button" value="수정" class="btn btn-primary py-2 px-3"  onclick="updateBoard()">
+                <input type="button" value="취소" class="btn btn-primary py-2 px-3" onclick="back();">                
+                <input type="reset" value="초기화" class="btn btn-primary py-2 px-3">
+
               </div>
               
 			  <div style="display:none">

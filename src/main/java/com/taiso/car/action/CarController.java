@@ -37,6 +37,15 @@ public class CarController extends HttpServlet {
 			forward.setRedirect(false);
 			
 		}
+		else if(command.equals("/CarResvAction.ca")) {
+			action = new CarResvAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		else if(command.equals("/CarList.ca")) {
 			System.out.println(" C : /CarList.ca 호출 ");
 			System.out.println(" C : [패턴3]");

@@ -136,33 +136,36 @@
 								over her cheek, then she continued her way.</p>
 						</div>
 
+						<c:set var = "dto" value="${reviewList }"/>
 						<!-- 리뷰 탭 시작 -->
 						<div class="tab-pane fade" id="pills-review" role="tabpanel"
 							aria-labelledby="pills-review-tab">
 							<div class="row">
 								<div class="col-md-7">
 									<h3 class="head">${sessionScope.cnt}개의리뷰</h3>
-									<c:forEach var="dto" items="${reviewList }">
-										<div class="review d-flex">
-											<div class="user-img"
-												style="background-image: url(./upload/${dto.rev_image.split(',')[0] })"></div>
-											<div class="desc">
-												<h4>
-													<span class="text-left">${dto.rev_subject }</span> <span
-														class="text-right">${dto.rev_date }</span>
-												</h4>
-												<p class="star">
-													<span> <c:forEach begin="1" end="${dto.rev_star }"
-															step="1">
-															<i class="ion-ios-star"></i>
-														</c:forEach>
-													</span> <span class="text-right"><a href="#" class="reply"><i
-															class="icon-reply"></i></a></span>
-												</p>
-												<p>${dto.rev_content }</p>
-											</div>
+
+								<c:forEach var="dto" items="${reviewList }">
+									<div class="review d-flex">
+										<div class="user-img"
+											style="background-image: url(./upload/${dto.rev_image.split(',')[0] })"></div>
+										<div class="desc">
+											<h4>
+												<span class="text-left">${dto.rev_subject }</span>
+												<span class="text-right">${dto.rev_date }</span>
+											</h4>
+											<p class="star">
+												<span> <c:forEach begin="1" end="${dto.rev_star }"
+														step="1">
+														<i class="ion-ios-star"></i>
+													</c:forEach>
+												</span> <span class="text-right"><a href="#" class="reply"><i
+														class="icon-reply"></i></a></span>
+											</p>
+											<p>${dto.rev_content }</p>
 										</div>
-									</c:forEach>
+									</div>
+								</c:forEach>
+
 									<div class="col-md-5">
 										<div class="rating-wrap">
 										

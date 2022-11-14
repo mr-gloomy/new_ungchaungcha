@@ -52,30 +52,45 @@ public class CarDAO {
 		}
 	}// 자원해제 메서드-closeDB()
 	
+	// 카테고리에 대한 차 정보 가져오는 메서드
+//	public List getCarList(String item) {
+//		List car
+//		
+//		
+//	}
+	
 	// 차정보 가져오는 메서드
 	public List getCarList(String item) {
 		List carsList = new ArrayList();
 		StringBuffer SQL = new StringBuffer();
+		
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@");
 
 		CarDTO cDTO = null;
+		
 		try {
+			// 디비 연결
 			con = getConnection();
+			
 			SQL.append("select * from car");
 			
-			if (item.equals("all")) {
-				System.out.println(" DAO : all "+SQL);
-			} else {
+			if(item.equals("all")) {
+				System.out.println(" DAO : all : " + SQL);
+			}
+			else {
 				SQL.append(" where car_category=?");
 				System.out.println(" DAO : car_categroy "+SQL);
 			}
 			pstmt = con.prepareStatement(SQL+"");
 			
-			if(item.equals("all")) {
-			}else {
+			if(item.equals("all")){
+			}
+			else {
 				pstmt.setString(1, item);
 			}
 
 			rs = pstmt.executeQuery();
+			
 			while (rs.next()) {
 				cDTO = new CarDTO();
 
@@ -89,17 +104,6 @@ public class CarDAO {
 				cDTO.setCar_op(rs.getString("car_op"));
 				cDTO.setCar_price(rs.getInt("car_price"));
 				cDTO.setCar_year(rs.getString("car_year"));
-				
-//				dto.setBest(rs.getInt("best"));
-//				dto.setCategory(rs.getString("category"));
-//				dto.setColor(rs.getString("color"));
-//				dto.setContent(rs.getString("content"));
-//				dto.setDate(rs.getTimestamp("date"));
-//				dto.setGno(rs.getInt("gno"));
-//				dto.setImage(rs.getString("image"));
-//				dto.setName(rs.getString("name"));
-//				dto.setPrice(rs.getInt("price"));
-//				dto.setSize(rs.getString("size"));
 
 				carsList.add(cDTO);
 			}

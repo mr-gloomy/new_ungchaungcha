@@ -50,6 +50,9 @@
 		})
 	}
 	
+	function back(){
+		history.back();
+	}
 
 	</script>
 </head>
@@ -127,7 +130,10 @@
 			  </label>
 			  
 			  <div class="form-group">
-                <input type="button" value="등록" class="btn btn-primary py-2 px-5"  onclick="insertBoard()">
+                <input type="button" value="등록" class="btn btn-primary py-2 px-3"  onclick="insertBoard()">
+                <input type="button" value="취소" class="btn btn-primary py-2 px-3" onclick="back();">
+                <input type="reset" value="초기화" class="btn btn-primary py-2 px-3">
+
               </div>
               
 			  <div style="display:none">

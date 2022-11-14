@@ -5,7 +5,27 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
-
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+<script type="text/javascript">
+	function deleteBoard(seq){
+		Swal.fire({
+		  title: '글을 삭제 하시겠습니까?',
+		  text: "삭제하시면 다시 복구시킬 수 없습니다.",
+		  icon: 'info',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: 'grey',
+		  confirmButtonText: '삭제',
+		  cancelButtonText: '취소'
+		}).then((result) => {
+		  if (result.value) {
+	          //"등록" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+			  location.href='./ReviewDeleteAction.rev?rev_num=2';
+		  }
+		})
+	}
+</script>
 </head>
 <body>
 
@@ -28,14 +48,10 @@
 	%>		
 			<form action="./ReviewWrite.rev">
 				<input type = "submit" value = "리뷰 등록">
-				<input type = "hidden" name = "rez_uqNum" value = "1">
 			</form>
 			
-			<!-- <a href = "./ReviewWrite.rev?rez_uqNum=1">리뷰등록</a> -->
-			
-			<input type = "button" value = "리뷰 등록" onclick="location.href='./ReviewWrite.rev?rez_uqNum=1;">
 			<input type = "button" value = "수정" onclick="location.href='./ReviewUpdateAction.rev?rev_num=2';">
-			<input type = "button" value = "삭제" onclick="location.href='./ReviewDeleteAction.rev?rev_num=2';">
+			<input type = "button" value = "삭제" onclick="deleteBoard();">
 			<a href = "./ReviewListAction.rev">리뷰확인</a>
 </body>
 </html>

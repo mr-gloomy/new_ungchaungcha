@@ -186,7 +186,7 @@ public class ReviewDAO {
 	}
 	// 리뷰 글삭제 메서드 - deleteReview(int rev_num) - 끝
 	
-	// 리뷰 전체 글 계산하는 메서드 - getReviewCount()
+	// 차량 코드에 해당하는 글 개수 계산하는 메서드 - getReviewCount()
 	public int getReviewCount() {
 		int cnt = 0;
 		
@@ -195,8 +195,9 @@ public class ReviewDAO {
 			con = getConnection();
 			
 			// 쿼리 작성 및 객체 생성
-			sql = "select count(*) from car_review";
+			sql = "select count(*) from car_review where car_code=?";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 1);
 			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
@@ -215,7 +216,8 @@ public class ReviewDAO {
 	}
 	// 리뷰 전체 글 계산하는 메서드 - getReviewCount() - 끝
 	
-	// 리뷰 글 정보 모두 저장하는 배열 - getReviewList()
+	// 차량 코드에 해당하는 리뷰 글 정보 저장하는 배열 - getReviewList()
+	// 나중에 닉네임도 받기 !
 	public List getReviewList() {
 		List reviewList = new ArrayList<>();
 		
@@ -224,8 +226,9 @@ public class ReviewDAO {
 			con = getConnection();
 			
 			// 쿼리 작성 및 객체 생성
-			sql = "select * from car_review order by rev_num desc";
+			sql = "select * from car_review where car_code = ? order by rev_num desc";
 			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, 1);
 			
 			rs = pstmt.executeQuery();
 			

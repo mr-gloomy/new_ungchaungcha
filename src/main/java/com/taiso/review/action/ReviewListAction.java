@@ -26,7 +26,7 @@ public class ReviewListAction implements Review {
 //			forward.setRedirect(true);
 //			return forward;
 //		}
-		
+
 		ReviewDAO rDAO = new ReviewDAO();
 		
 		// 디비에 등록된 글 개수 불러오기

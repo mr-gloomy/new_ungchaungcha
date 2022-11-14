@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/flaticon.css">
     <link rel="stylesheet" href="css/icomoon.css">
     <link rel="stylesheet" href="css/style.css">
+    
   </head>
   <body>
     
@@ -49,30 +50,47 @@
     </div>
 
 
-     <section class="ftco-section ftco-no-pt bg-light">
+<!--      <section class="ftco-section ftco-no-pt bg-light"> -->
+		<section class="ftco-section bg-light">
     	<div class="container">
     		<div class="row no-gutters">
     			<div class="col-md-12 featured-top">
-					<form action="./CarList.ca" method="post" class="request-form ftco-animate bg-primary">
+					<form action="./CarResvAction.ca" method="post" name="fr" class="request-form ftco-animate bg-primary" onSubmit="return checkForm()">
 					
 		          		<h2>예약하기</h2>
-				        <label for="" class="label">대여 / 반납일</label><br>
-				        <input type="text" class="form-control" name="rez_total_date" id="book_range_date" placeholder="Date">
+    					<div class="d-flex">
+							<div class="form-group mr-2">
+						        <label for="" class="label">대여일</label><br>
+						        <input type="text" class="form-control" name="rez_pick_date" id="book_start_date" placeholder="Date">
+							</div>
+							<div class="form-group mr-2">
+						        <label for="" class="label">반납일</label><br>
+						        <input type="text" class="form-control" name="rez_off_date" id="book_off_date" placeholder="Date">
+							</div>
+						</div>	       		
+						<label for="" class="label" id="datealert"></label><br>
 						<div class="d-flex">
 							<div class="form-group mr-2">
 								<label for="" class="label">대여시간</label>
-								<input type="text" class="form-control" name="rez_time_pick" id="time_pick" placeholder="픽업시간을 선택하세요">
+<!-- 								<input type="text" class="form-control" name="rez_pick_time" id="time_pick" placeholder="픽업시간을 선택하세요"> -->
+								<input type="time" name="rez_pick_time" placeholder="대여시간을 선택하세요">
 							</div>
 							<div class="form-group mr-2">
 								<label for="" class="label">반납시간</label>
-								<input type="text" class="form-control" name="rez_time_off" id="time_off" placeholder="반납시간을 선택하세요">
+<!-- 								<input type="text" class="form-control" name="rez_off_time" id="time_off" placeholder="반납시간을 선택하세요"> -->
+								<input type="time" name="rez_off_time" placeholder="반납시간을 선택하세요">
 							</div>
 						</div>
 			    		<div class="form-group">
 							<label for="" class="label">이용지점</label>
-						    <select name="addressRegion" id="addressRegion1"></select>
-						    <select name="addressDo" id="addressDo1"></select>
-						    <select name="rez_site" id="addressSiGunGu1"></select>
+							<select id="sido_select">
+						          <option value="" selected disabled hidden>==지역을 선택하세요==</option>	
+						          <option value="서울" >서울</option>
+						          <option value="부산" >부산</option>
+							</select>
+							<select id="site_select" name="jijum">
+						          <option value="" selected disabled hidden>==지점을 선택하세요==</option>	
+							</select>
 						</div>           
 						<div class="form-group">
 							<input type="submit" value="차량 검색" class="btn btn-secondary py-3 px-4">
@@ -106,118 +124,147 @@
   <script src="js/aos.js"></script>
   <script src="js/jquery.animateNumber.min.js"></script>
   <script src="js/bootstrap-datepicker.js"></script>
+  <script src="js/bootstrap-datepicker.ko.js"></script>
   <script src="js/jquery.timepicker.min.js"></script>
   <script src="js/scrollax.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
   <script src="js/google-map.js"></script>
   <script src="js/main.js"></script>
-
-<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+  
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 
 
-<script type="text/javascript">
+   <script type="text/javascript">
 // daterangepicker
 $(function() {
 	
-	  $('#book_range_date').daterangepicker({
-	    opens: 'bottom'
-	  }, function(start, end, label) {
-	    console.log("A new date selection was made:" + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
-	  });
-	});
-	
-	
-	
-	
-// rez_site_select
-$(function(){
-    areaSelectMaker("select[name=addressRegion]");
+// 	  $('#book_range_date').daterangepicker({
+// 	    opens: 'bottom'
+// 	  }, function(start, end, label) {
+// 	    console.log("A new date selection was made:" + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+// 	  });
+	  
+		$('#book_start_date').datepicker({
+			  format: "yyyy-mm-dd",
+			  autoclose : true,	
+// 			  calendarWeeks : false,
+// 			  clearBtn : false, 
+// 			  showWeekDays : true ,
+			  todayHighlight : true ,
+			  language : "ko" ,
+			  startDate: new Date()
+		}).on("changeDate", function(){
+		  $("#book_off_date").datepicker("setStartDate", new Date($("#book_start_date").val()));
+		});
+		  
+		$('#book_off_date').datepicker({
+			  format: "yyyy-mm-dd",
+			  
+			  
+			  autoclose : true,	
+// 			  calendarWeeks : false,
+// 			  clearBtn : false, 
+// 			  showWeekDays : true ,
+			  todayHighlight : true ,
+			  language : "ko",
+// 			  maxDate : "+30D"
+		}).on("changeDate", function(){
+		  $("#book_start_date").datepicker("setEndDate", new Date($("#book_off_date").val()));
+		  $()
+		});
+		
+		$('#book_off_date').change(function(){
+// 			console.log(a);
+// 			alert('성공');
+			var rpick_d = new Date(document.fr.rez_pick_date.value);
+			var roff_d = new Date(document.fr.rez_off_date.value);
+			var ch = roff_d.getTime()-rpick_d.getTime();
+			var charDay = ch/(1000*60*60*24);
+			if(charDay >= 28){
+// 		 		alert("단기렌트는 28일까지만 가능합니다.");
+// 				$('#datealert').remove();
+				$('#datealert').append("<h7>단기렌트는 28일까지만 가능합니다.</h7>");
+// 				return false;
+				return;
+			} else {
+// 				$('#datealert').remove();
+				$('#datealert').append("대여기간 : 총 "+charDay+"일");
+// 				return false;
+				return;
+			}
+		});
+
+		$("#time_pick,#time_off").timepicker({
+			minTime: '9:00 am',
+		    maxTime: '9:00 pm',
+// 		    format: "hh:mm:ss"
+		});
+		
+		$('#time_pick').change(function(){
+			var rpick_t = document.fr.rez_pick_time.value;
+// 			var rpick_t = new Date(document.fr.rez_pick_time.value);
+			var tt = Date.parse(rpick_t);
+// 			var tt = rpick_t.getTime();
+// 			alert(rpick_t+10);
+			alert(tt);
+		});
+		
+		$("#sido_select").change(function(){
+			var sido=$(this).val();
+//	 		alert("sido : "+sido);
+			$("#site_select option").remove();
+			$.ajax({
+				url : "site.json",
+				type : "get",
+				datatype : "json",
+				success : function(data) {
+//	 				alert('success');
+//	 				let str = JSON.stringify(data);	// 데이터 확인
+//	 				alert(str);
+					$(data).each(function(i){
+						if(sido==data[i].sido){
+//	 						alert('일치');
+							$('#site_select').append("<option>"+data[i].name+"</option>");
+						}
+					});
+				},
+				error : function() {
+					alert('error');			
+				}
+			});	// ajax 끝
+		});	// selectBox_test 끝
 });
 
-	var areaSelectMaker = function(target){
-	    if(target == null || $(target).length == 0){
-	        console.warn("Unkwon Area Tag");
-	        return;
-	    }
 
-    var area = {
-            "수도권" :{
-                "서울특별시" : [ "강남지점", "강동구", "강북구"],
-                "경기도" : [ "수원시 장안구", "수원시 권선구", "수원시 팔달구"],
-                "인천광역시" : [ "계양구", "미추홀구", "남동구"]      
-            },
-            "강원권" :{
-                "강원도" : [ "춘천시", "원주시", "강릉시"]      
-            },
-            "충청권" :{
-                "충청북도" : [ "청주시 상당구", "청주시 서원구", "청주시 흥덕구"],
-                "충청남도" : [ "천안시 동남구", "천안시 서북구", "공주시"],
-                "대전광역시" : [ "대덕구", "동구", "서구"],
-                "세종특별자치시" : [ "세종특별자치시" ]     
-            },
-            "전라권" :{
-                "전라북도" : [ "전주시 완산구", "전주시 덕진구", "군산시"],
-                "전라남도" : [ "목포시", "여수시", "순천시"],
-                "광주광역시" : [ "광산구", "남구", "동구"]     
-            },
-            "경상권" : {
-                "경상북도" : [ "포항시 남구", "포항시 북구", "경주시"],
-                "경상남도" : [ "창원시 의창구", "창원시 성산구", "창원시 마산합포구"],
-                "부산광역시" : [ "강서구", "금정구", "남구", "연제구"],
-                "대구광역시" : [ "남구", "달서구", "동구"],
-                "울산광역시" : [ "남구", "동구", "북구"]     
-            },
-            "제주권" : {
-                "제주특별자치도" : [ "서귀포시", "제주시"]     
-            }
-        };
 
-    for(i=0; i<$(target).length; i++){
-        (function(z){
-            var a1 = $(target).eq(z);
-            var a2 = a1.next();
-            var a3 = a2.next();
-
-            //초기화
-            init(a1, true);
-
-            //권역 기본 생성
-            var areaKeys1 = Object.keys(area);
-            areaKeys1.forEach(function(Region){
-                a1.append("<option value="+Region+">"+Region+"</option>");
-            });
-
-            //변경 이벤트
-            $(a1).on("change", function(){
-                init($(this), false);
-                var Region = $(this).val();
-                var keys = Object.keys(area[Region]);
-                keys.forEach(function(Do){
-                    a2.append("<option value="+Do+">"+Do+"</option>");    
-                });
-            });
-
-            $(a2).on("change", function(){
-                a3.empty().append("<option value=''>선택</option>");
-                var Region = a1.val();
-                var Do = $(this).val();
-                var keys = Object.keys(area[Region][Do]);
-                keys.forEach(function(SiGunGu){
-                    a3.append("<option value="+area[Region][Do][SiGunGu]+">"+area[Region][Do][SiGunGu]+"</option>");    
-                });
-            });
-        })(i);        
-
-        function init(t, first){
-            first ? t.empty().append("<option value=''>선택</option>") : "";
-            t.next().empty().append("<option value=''>선택</option>");
-            t.next().next().empty().append("<option value=''>선택</option>");
-        }
-    }
+function checkForm(){
+	if(document.fr.rez_pick_date.value==""){
+		alert("대여일을 선택해주세요");
+		document.fr.rez_pick_date.focus();
+		return false;
+	}
+	if(document.fr.rez_off_date.value==""){
+		alert("반납일을 선택해주세요");
+		document.fr.rez_off_date.focus();
+		return false;
+	}
+	if(document.fr.rez_pick_time.value==""){
+		alert("대여시간을 선택해주세요");
+		document.fr.rez_pick_time.focus();
+		return false;
+	}
+	if(document.fr.rez_off_time.value==""){
+		alert("반납시간을 선택해주세요");
+		document.fr.rez_off_time.focus();
+		return false;
+	}
+	if(document.fr.sido_select.value=="" || document.fr.site_select.value==""){
+		alert("이용지점을 선택해주세요");
+		document.fr.site_select.focus();
+		return false;
+	}
 }
+
 </script>  
     
 </html>
