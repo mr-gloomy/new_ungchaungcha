@@ -42,13 +42,12 @@ public class QuestionWriteAction implements Board {
 //		bodto.setBo_re_ref(Integer.parseInt(request.getParameter("bo_re_ref")));
 //		bodto.setBo_re_lev(Integer.parseInt(request.getParameter("bo_re_lev")));
 //		bodto.setBo_re_seq(Integer.parseInt(request.getParameter("bo_re_seq")));
-//		bodto.setMem_id(multi.getParameter("mem_id"));
+		bodto.setMem_id(multi.getParameter("mem_id"));
 		bodto.setBo_cate(multi.getParameter("bo_cate"));
 		bodto.setBo_title(multi.getParameter("bo_title"));
 		bodto.setBo_pass(multi.getParameter("bo_pass"));
 		bodto.setBo_content(multi.getParameter("bo_content"));
 		bodto.setBo_file(multi.getFilesystemName("bo_file"));
-		//작성자 변수명 회의 후 정해지면 추가 
 //		bodto.setSysdate(null)
 
 		

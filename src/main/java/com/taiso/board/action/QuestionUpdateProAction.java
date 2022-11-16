@@ -21,6 +21,9 @@ public class QuestionUpdateProAction implements Board {
 		bodto.setBo_title(request.getParameter("bo_title"));
 		bodto.setBo_pass(request.getParameter("bo_pass"));
 		bodto.setBo_content(request.getParameter("bo_content"));
+		bodto.setBo_file(request.getParameter("bo_file"));
+		
+		
 		
 //		String pageNum = request.getParameter("pageNum");
 		

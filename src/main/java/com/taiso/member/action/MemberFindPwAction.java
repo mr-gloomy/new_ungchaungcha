@@ -2,7 +2,6 @@ package com.taiso.member.action;
 
 import java.io.PrintWriter;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,31 +24,34 @@ public class MemberFindPwAction implements Member {
 		MemberDAO mDAO = new MemberDAO();
 		MemberDTO mDTO = mDAO.memberFindPw(mem_id,mem_name,mem_email);
 		
-		System.out.println(" M : 비밀번호 찾기 필요 정보 : " +mDTO);
+		System.out.println(" M : 비밀번호 찾기 : " +mDTO);
 		
-		// 결과에 따른 페이지 이동(JS)	
+		// 정보 request 영역 저장
+		request.setAttribute("mDTO", mDTO);
+		
+		// 페이지 이동
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		if(mDTO != null) {
-			out.print("<script>");
-			out.print("	alert('"+mem_name+"님의 비밀번호는 "+mDTO.getMem_pw()+"입니다.'); ");
-			out.print(" location.href='./MemberFindPwResult.me'; ");
-			out.print("</script>");
-			out.close();
+		MemberForward forward = new MemberForward();
+		
+		if(mDTO != null) {	
+			forward.setPath("member/memberFindPwResult.jsp");
+			forward.setRedirect(false);
 			
-			return null;	
+			return forward;
 			
-		}else { 
+		}else {
 			out.print("<script>");
-			out.print(" alert('일치하는 회원정보가 존재하지 않습니다.'); ");
-			out.print(" location.href='./MemberJoin.me'; ");
+			out.print(" alert('일치하는 정보가 없습니다.'); ");
+			out.print(" location.href='./MemberFindPw.me'; ");
 			out.print("</script>");
 			out.close();
 			
 			return null;
-		}
 
+		}		
+				
 	}
 
 }

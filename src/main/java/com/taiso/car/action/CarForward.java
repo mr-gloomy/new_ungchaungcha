@@ -4,8 +4,6 @@ public class CarForward {
 	private String path;
 	private boolean isRedirect;
 	
-	// 이동 방법 -  true : redirect 방식 이동
-	//				false : forward 방식 이동
 	public String getPath() {
 		return path;
 	}
@@ -18,6 +16,7 @@ public class CarForward {
 	public void setRedirect(boolean isRedirect) {
 		this.isRedirect = isRedirect;
 	}
+	
 	
 	
 }

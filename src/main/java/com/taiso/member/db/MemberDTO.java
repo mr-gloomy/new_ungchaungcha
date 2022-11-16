@@ -16,7 +16,7 @@ public class MemberDTO {
 	private String mem_birthday;		// 회원 생년월일
 	private int mem_accept_sns;			// 회원 SNS 수신 여부
 	private String mem_image;			// 회원 프로필 이미지
-	private int mem_blacklist;			// 회원 블랙리스트
+	private String mem_blacklist;		// 회원 블랙리스트
 	private String license_num;			// 회원 면허증 번호
 	
 	
@@ -89,10 +89,10 @@ public class MemberDTO {
 	public void setMem_image(String mem_image) {
 		this.mem_image = mem_image;
 	}
-	public int getMem_blacklist() {
+	public String getMem_blacklist() {
 		return mem_blacklist;
 	}
-	public void setMem_blacklist(int mem_blacklist) {
+	public void setMem_blacklist(String mem_blacklist) {
 		this.mem_blacklist = mem_blacklist;
 	}
 	public String getLicense_num() {

@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
-<!-- 헤더들어가는곳 -->
   <head>
     <title>Carbook - Free Bootstrap 4 Template by Colorlib</title>
     <meta charset="utf-8">
@@ -31,99 +31,109 @@
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
 	
 	<script type="text/javascript">
-	
-	function insertBoard(seq){
+
+	function updateBoard(seq){
 		Swal.fire({
-		  title: '글을 등록하시겠습니까?',
+		  title: '글을 수정하시겠습니까?',
 		  // text: "삭제하시면 다시 복구시킬 수 없습니다.",
 		  icon: 'info',
 		  showCancelButton: true,
 		  confirmButtonColor: '#3085d6',
 		  cancelButtonColor: 'grey',
-		  confirmButtonText: '등록',
+		  confirmButtonText: '수정',
 		  cancelButtonText: '취소'
 		}).then((result) => {
 		  if (result.value) {
-	          //"등록" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
-	          fr.submit();
+	        //"등록" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+	 		if(document.fr.rev_subject.value == ""){
+	 		    Swal.fire({
+	 		    	icon: 'error',
+					text: '제목을 입력해주세요'
+				})
+	 			document.fr.rev_subject.focus();
+	 			return;
+	 		}
+	 		if(document.fr.rev_content.value == ""){
+	 		    Swal.fire({
+	 		    	icon: 'error',
+					text: '내용을 입력해주세요'
+				})
+	 			document.fr.rev_content.focus();
+	 			return;
+	 		}
+	 		if(document.fr.rev_star.value == ""){
+	 		    Swal.fire({
+	 		    	icon: 'error',
+					text: '별점을 입력해주세요'
+				})
+	 			document.fr.rev_star.focus();
+	 			return;
+	 		}
+	 		else{
+	 		    Swal.fire({
+	 		    	icon: 'success',
+					text: '글이 수정되었습니다'
+				})
+	 		}
+			var f= document.forms.fr;
+			document.domain = "localhost"; 
+		    opener.name = "openerNames";
+		    f.target = opener.name;
+		    
+	        fr.submit();
+	        self.close();
+
 		  }
 		})
+	}
+	
+	function backBoard(seq){
+		Swal.fire({
+		  title: '이전페이지로 돌아가시겠습니까?',
+		  // text: "삭제하시면 다시 복구시킬 수 없습니다.",
+		  icon: 'info',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: 'grey',
+		  confirmButtonText: '네',
+		  cancelButtonText: '아니오'
+		}).then((result) => {
+		  if (result.value) {
+	          //"등록" 버튼을 눌렀을 때 작업할 내용을 이곳에 넣어주면 된다. 
+				var f= document.forms.fr;
+				document.domain = "localhost"; 
+			    opener.name = "openerNames";
+			    f.target = opener.name;
+			    
+		        self.close();
+		  }
+		})
+	}
+	
+	function back(){
+		history.back();
 	}
 	
 
 	</script>
 </head>
   <body>
-  	<!-- 헤더 -->
-	<jsp:include page="../inc/top.jsp"></jsp:include>
-  	<!-- 헤더 끝-->
-
-<!-- 	<h1>예약하기</h1> -->
-
-<!-- Left Side -->
-    <section class="ftco-section contact-section">
-      <div class="container">
-        <div class="row d-flex mb-5 contact-info">
-        	<div class="col-md-4">
-        		<div class="row mb-5">
-		          <div class="col-md-12">
-<!-- 		          	<div class="border w-100 p-4 rounded mb-2 d-flex"> -->
-<!-- 			          	<div class="icon mr-3"> -->
-<!-- 			          		<span class="icon-map-o"></span> -->
-<!-- 			          	</div> -->
-<!--							 <p><span>[예약정보]</span> 198 West 21th Street, Suite 721 New York NY 10016</p> -->
-<!-- 			          </div> -->
-		          </div>
-<!-- 		          <div class="col-md-12"> -->
-<!-- 		          	<div class="border w-100 p-4 rounded mb-2 d-flex"> -->
-<!-- 			          	<div class="icon mr-3"> -->
-<!-- 			          		<span class="icon-mobile-phone"></span> -->
-<!-- 			          	</div> -->
-<!-- 			            <p><span>[선택차량정보]</span> <a href="tel://1234567920">글자늘리면 저절로 칸 수 늘어남글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남글자늘리면 저절로 칸 수 늘어남 글자늘리면 저절로 칸 수 늘어남 </a></p> -->
-<!-- 			          </div> -->
-<!-- 		          </div> -->
-<!-- 		          <div class="col-md-12"> -->
-<!-- 		          	<div class="border w-100 p-4 rounded mb-2 d-flex"> -->
-<!-- 			          	<div class="icon mr-3"> -->
-<!-- 			          		<span class="icon-envelope-o"></span> -->
-<!-- 			          	</div> -->
-<!-- 			            <p><span>Email:</span> <a href="mailto:info@yoursite.com">이것도 저절로 늘어남!!!</a></p> -->
-<!-- 			          </div> -->
-<!-- 		          </div> -->
-		        </div>
-          </div>
-<!-- Left Side -->
 
 <!-- contact 작성Form -->
 	
-		<!-- <h1>예약하기</h1> 여기쓰면 화면 어그러짐-->
           <div class="col-md-8 block-9 mb-md-5">
-            <form action="./ReviewWriteAction.re" name = "fr" class="bg-light p-5 contact-form" method="post" enctype="multipart/form-data">
+            <form action="./ReviewUpdateProAction.rev?rev_num=${dto.rev_num }" name = "fr" class="bg-light p-5 contact-form" method="post" >
            <div class="form-group">
-           	 <h3><b>리뷰 등록</b></h3>	 
-<%--                 제목 : <input type="text" name="name" class="form-control" value="${dto.name }"><br> --%>
-                           
-<%--                 이용 후기 : <input type="text" name="phone" class="form-control" value="${dto.tel }"><br> --%>
-                        
-<%--                 평점 : <input type="text" name="birth" class="form-control" value="${dto.birth }"><br> --%>
-
-<%--                 첨부파일 : <input type="email" name="email" class="form-control" value="${dto.email }"><br> --%>
-<!--               </div> -->
-
-<!--               <hr> -->
-              
-              
+           	 <h3><b>리뷰 수정</b></h3>	 
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="제목" name="rev_subject">
+                <input type="text" class="form-control" name="rev_subject" value="${dto.rev_subject }">
               </div>
               <div class="form-group">
-                <textarea name="rev_content" id="" cols="30" rows="15" class="form-control" placeholder="이용후기를 남겨주세요" ></textarea>
+                <textarea name="rev_content" id="" cols="30" rows="15" class="form-control"  >${dto.rev_content }</textarea>
               </div>
-<!--               <div class="form-group"> -->
-<!--                 <input type="text" class="form-control" placeholder="평점" name="rev_star"> -->
-<!--               </div> -->
-				<div class="star-rating space-x-4 mx-auto">
-					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings"/>
+              <c:if test="${dto.rev_star == 5 }">
+				  <div class="star-rating space-x-4 mx-auto">
+					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings" checked />
 					<label for="5-stars" class="star pr-4">★</label>
 					<input type="radio" id="4-stars" name="rev_star" value="4" v-model="ratings"/>
 					<label for="4-stars" class="star">★</label>
@@ -131,25 +141,78 @@
 					<label for="3-stars" class="star">★</label>
 					<input type="radio" id="2-stars" name="rev_star" value="2" v-model="ratings"/>
 					<label for="2-stars" class="star">★</label>
-					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings" />
+					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings"/>
 					<label for="1-star" class="star">★</label>
-				</div>
+				  </div>
+			  </c:if>
+              <c:if test="${dto.rev_star == 4 }">
+				  <div class="star-rating space-x-4 mx-auto">
+					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings" />
+					<label for="5-stars" class="star pr-4">★</label>
+					<input type="radio" id="4-stars" name="rev_star" value="4" v-model="ratings" checked/>
+					<label for="4-stars" class="star">★</label>
+					<input type="radio" id="3-stars" name="rev_star" value="3" v-model="ratings"/>
+					<label for="3-stars" class="star">★</label>
+					<input type="radio" id="2-stars" name="rev_star" value="2" v-model="ratings"/>
+					<label for="2-stars" class="star">★</label>
+					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings"/>
+					<label for="1-star" class="star">★</label>
+				  </div>
+			  </c:if>
+              <c:if test="${dto.rev_star == 3 }">
+				  <div class="star-rating space-x-4 mx-auto">
+					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings" />
+					<label for="5-stars" class="star pr-4">★</label>
+					<input type="radio" id="4-stars" name="rev_star" value="4" v-model="ratings"/>
+					<label for="4-stars" class="star">★</label>
+					<input type="radio" id="3-stars" name="rev_star" value="3" v-model="ratings" checked/>
+					<label for="3-stars" class="star">★</label>
+					<input type="radio" id="2-stars" name="rev_star" value="2" v-model="ratings"/>
+					<label for="2-stars" class="star">★</label>
+					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings"/>
+					<label for="1-star" class="star">★</label>
+				  </div>
+			  </c:if>
+              <c:if test="${dto.rev_star == 2 }">
+				  <div class="star-rating space-x-4 mx-auto">
+					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings" />
+					<label for="5-stars" class="star pr-4">★</label>
+					<input type="radio" id="4-stars" name="rev_star" value="4" v-model="ratings"/>
+					<label for="4-stars" class="star">★</label>
+					<input type="radio" id="3-stars" name="rev_star" value="3" v-model="ratings"/>
+					<label for="3-stars" class="star">★</label>
+					<input type="radio" id="2-stars" name="rev_star" value="2" v-model="ratings" checked/>
+					<label for="2-stars" class="star">★</label>
+					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings"/>
+					<label for="1-star" class="star">★</label>
+				  </div>
+			  </c:if>
+              <c:if test="${dto.rev_star == 1 }">
+				  <div class="star-rating space-x-4 mx-auto">
+					<input type="radio" id="5-stars" name="rev_star" value="5" v-model="ratings" />
+					<label for="5-stars" class="star pr-4">★</label>
+					<input type="radio" id="4-stars" name="rev_star" value="4" v-model="ratings"/>
+					<label for="4-stars" class="star">★</label>
+					<input type="radio" id="3-stars" name="rev_star" value="3" v-model="ratings"/>
+					<label for="3-stars" class="star">★</label>
+					<input type="radio" id="2-stars" name="rev_star" value="2" v-model="ratings"/>
+					<label for="2-stars" class="star">★</label>
+					<input type="radio" id="1-star" name="rev_star" value="1" v-model="ratings" checked/>
+					<label for="1-star" class="star">★</label>
+				  </div>
+			  </c:if>
 				<br>
-<!--               <div class="form-group"> -->
-<!--                 <input type="text" class="form-control" placeholder="첨부파일" name="rev_image"> -->
-<!--               </div> -->
-              <label class="input-file-button" for="input-file">
-				 사진 업로드
-			  </label>
-			  
 			  <div class="form-group">
-                <input type="button" value="등록" class="btn btn-primary py-2 px-5"  onclick="insertBoard()">
+                <input type="button" value="수정" class="btn btn-primary py-2 px-3"  onclick="return updateBoard();">
+                <input type="button" value="닫기" class="btn btn-primary py-2 px-3" onclick="backBoard();">                
+                <input type="reset" value="초기화" class="btn btn-primary py-2 px-3">
+
               </div>
               
 			  <div style="display:none">
 				<input type="file" id="input-file" name="rev_image"/> <br><br>
               </div>
-
+			</div>
               
               
            
@@ -162,7 +225,7 @@
 	
 	
 <!-- 푸터 시작 -->
-	<jsp:include page="../inc/bottom.jsp"></jsp:include>
+<%-- 	<jsp:include page="../inc/bottom.jsp"></jsp:include> --%>
 <!-- 푸터 끝 -->
 
   <!-- loader -->

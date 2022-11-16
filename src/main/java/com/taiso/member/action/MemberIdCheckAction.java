@@ -1,7 +1,6 @@
 package com.taiso.member.action;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.taiso.member.db.MemberDAO;
@@ -27,10 +26,10 @@ public class MemberIdCheckAction implements Member {
 			System.out.println(" M : 아이디 중복 X, 사용가능");
 		}
 		
-		// Action정보 -> JSP페이지 전달
+		// 정보 전달
 		request.setAttribute("result", result);		
 		
-		// 페이지 이동(준비)
+		// 페이지 이동
 		MemberForward forward = new MemberForward();
 		forward.setPath("./member/memberIdCheck.jsp?inputID="+mem_userId);	
 		forward.setRedirect(false);		

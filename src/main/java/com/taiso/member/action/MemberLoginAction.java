@@ -2,7 +2,6 @@ package com.taiso.member.action;
 
 import java.io.PrintWriter;
 
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,7 +15,7 @@ public class MemberLoginAction implements Member {
 		
 		System.out.println(" M : MemberLoginAction_execute() 호출 ");
 		
-		// 전달정보 저장(mem_id, mem_pw)
+		// 전달 정보 저장(mem_id, mem_pw)
 		String mem_id = request.getParameter("mem_id");
 		String mem_pw = request.getParameter("mem_pw");
 		
@@ -24,7 +23,7 @@ public class MemberLoginAction implements Member {
 		MemberDAO mDAO = new MemberDAO();
 		int result = mDAO.memberLogin(mem_id, mem_pw);
 		
-		// 체크 결과에 따른 페이지 이동(JS)	
+		// 체크 결과에 따른 페이지 이동
 		if(result == 0) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();

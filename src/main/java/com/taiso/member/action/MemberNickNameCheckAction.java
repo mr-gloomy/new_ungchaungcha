@@ -1,7 +1,6 @@
 package com.taiso.member.action;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.taiso.member.db.MemberDAO;
@@ -27,7 +26,7 @@ public class MemberNickNameCheckAction implements Member {
 			System.out.println(" M : 닉네임 중복 X, 사용가능");
 		}
 		
-		// Action정보 -> JSP페이지 전달
+		// 정보 저장
 		request.setAttribute("result", result);		
 		
 		// 페이지 이동(준비)

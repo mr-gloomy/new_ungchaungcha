@@ -153,6 +153,41 @@ public class MemberController extends HttpServlet {
 			}
 			
 			
+		}else if(command.equals("/MemberRemove.me")) {
+			System.out.println(" C : /MemberRemove.me 호출 ");
+			System.out.println(" C : [패턴 1] ");
+			
+			forward = new MemberForward();
+			forward.setPath("./member/memberRemove.jsp");
+			forward.setRedirect(false);
+			
+			
+		}else if(command.equals("/MemberRemoveAction.me")) {
+			System.out.println(" C : /MemberRemoveAction.me 호출 ");
+			System.out.println(" C : [패턴 3] ");
+			
+			// MemberRemoveAction() 객체
+			action = new MemberUpdateAction();
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			
+		}else if(command.equals("/MemberRemoveProAction.me")) {
+			System.out.println(" C : /MemberRemoveProAction.me 호출 ");
+			System.out.println(" C : [패턴 2] ");
+			
+			// MemberDeleteAction()
+			action = new MemberRemoveProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
 			
 		}else if(command.equals("/MemberLogout.me")) {
 			System.out.println(" C : /MemberLogout.me 호출 ");

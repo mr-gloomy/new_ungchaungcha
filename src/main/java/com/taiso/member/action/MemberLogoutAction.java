@@ -19,7 +19,7 @@ public class MemberLogoutAction implements Member {
 		// 주소 바꾸기!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 		// 페이지 이동
 		MemberForward forward = new MemberForward();
-		forward.setPath("./MeberLogin.me");
+		forward.setPath("./MemberLogin.me");
 		forward.setRedirect(true);
 		
 		return forward;

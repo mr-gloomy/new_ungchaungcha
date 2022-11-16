@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,6 +67,23 @@
 
 		<section class="ftco-section bg-light">
     	<div class="container">
+    	<div>
+<!-- 		<input type="radio" value="all" name="car_cartegory" onclick="location.href='./CarList.ca';">전체  -->
+<!-- 		<input type="radio" value="small" name="car_cartegory" onclick="location.href='./CarList.ca?item=small';">소형  -->
+<!-- 		<input type="radio" value="compact" name="car_cartegory" onclick="location.href='./CarList.ca?item=compact';">준중형   -->
+<!-- 		<input type="radio" value="middle" name="car_cartegory" onclick="location.href='./CarList.ca?item=middle';">중형   -->
+<!-- 		<input type="radio" value="large" name="car_cartegory" onclick="location.href='./CarList.ca?item=large';">대형   -->
+<!-- 		<input type="radio" value="suv" name="car_cartegory" onclick="location.href='./CarList.ca?item=suv';">suv   -->
+<!-- 		<input type="radio" value="foreign" name="car_cartegory" onclick="location.href='./CarList.ca?item=foreign';">수입차 -->
+
+		<a href="./CarList.ca">전체</a>
+		<a href="./CarList.ca?item=small">소형</a>
+		<a href="./CarList.ca?item=compact">준중형</a>
+		<a href="./CarList.ca?item=middle">중형</a>
+		<a href="./CarList.ca?item=large">대형</a>
+		<a href="./CarList.ca?item=suv">suv</a>
+		<a href="./CarList.ca?item=foreign">수입차</a>
+		</div>
     		<div class="row">
     			<div class="col-md-4">
     				<div class="car-wrap rounded ftco-animate">

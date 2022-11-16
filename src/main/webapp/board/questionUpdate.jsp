@@ -43,7 +43,7 @@
         <div class="row no-gutters slider-text js-fullheight align-items-end justify-content-start">
           <div class="col-md-9 ftco-animate pb-5">
           	<p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Contact <i class="ion-ios-arrow-forward"></i></span></p>
-            <h1 class="mb-3 bread">마이페이지</h1>
+            <h1 class="mb-3 bread">1:1 문의하기</h1>
           </div>
         </div>
       </div>
@@ -115,12 +115,31 @@
 	           <input type="hidden" name="bo_re_seq" value="${bodto.bo_re_seq }">
 	           <input type="hidden" name="bo_re_lev" value="${bodto.bo_re_lev }">
                카테고리 : <select class="form-select form-select-sm" name="bo_cate" aria-label=".form-select-sm example">
-						  <option selected>분류</option>
-						  <option value="1">이용안내</option>
-						  <option value="2">예약/결제</option>
-						  <option value="3">취소/환불</option>
-						  <option value="4">보험/사고</option>
-						  <option value="5">기타</option>
+						  <option value="1" 
+						  <c:if test="${bodto.category.equals('1') }">
+				       	  selected="selected"
+				      	  </c:if>
+				      	  >이용안내</option>
+						  <option value="2"
+						    <c:if test="${bodto.category.equals('2') }">
+				        	selected="selected"
+				      		</c:if>
+						  >예약/결제</option>
+						  <option value="3"
+						    <c:if test="${bodto.category.equals('3') }">
+				        	selected="selected"
+				      		</c:if>
+						  >취소/환불</option>
+						  <option value="4"
+						    <c:if test="${bodto.category.equals('4') }">
+				        	selected="selected"
+				      		</c:if>
+						  >보험/사고</option>
+						  <option value="5"
+						    <c:if test="${bodto.category.equals('5') }">
+				        	selected="selected"
+				      		</c:if>
+						  >기타</option>
 						</select>
               </div> 
               <div class="form-group">
@@ -145,8 +164,8 @@
               <hr>
 				<!-- 버튼 -->
 				<div class="d-grid gap-8 col-3 mx-auto">
-					<input type="submit" value="수정완료" class="btn btn-primary"/>
-					<input type="button" value="목록이동" class="btn btn-primary" onclick="location.href='./QuestionUpdateProAction.bo?bo_num=${bodto.bo_num }';">
+					<input type="submit" value="수정완료" class="btn btn-primary" onclick="location.href='./QuestionUpdateProAction.bo?bo_num=${bodto.bo_num }';">
+					<input type="submit" value="목록이동" class="btn btn-primary"/>
 				</div>
             </form>
           

@@ -8,7 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+@WebServlet("*.rev")
 public class ReviewController extends HttpServlet {
 
 	protected void doProcess(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -31,15 +31,22 @@ public class ReviewController extends HttpServlet {
 		ReviewForward forward = null;
 		
 		// 2. 가상주소 매핑(패턴 1, 2, 3)
-		if(command.equals("/ReviewWrite.re")) {
-			System.out.println("C : /ReviewWrite.re 호출");
+		if(command.equals("/ReviewList.rev")){
+			System.out.println("C : /ReviewList.rev 호출");
+			
+			forward = new ReviewForward();
+			forward.setPath("./review/reviewList.jsp");
+			forward.setRedirect(false);
+		}
+		else if(command.equals("/ReviewWrite.rev")) {
+			System.out.println("C : /ReviewWrite.rev 호출");
 			
 			forward = new ReviewForward();
 			forward.setPath("./review/reviewWrite.jsp");
 			forward.setRedirect(false);
 		}
-		else if(command.equals("/ReviewWriteAction.re")) {
-			System.out.println("C : /ReviewWriteAction.re 호출");
+		else if(command.equals("/ReviewWriteAction.rev")) {
+			System.out.println("C : /ReviewWriteAction.rev 호출");
 			
 			action = new ReviewWriteAction();
 			
@@ -50,10 +57,78 @@ public class ReviewController extends HttpServlet {
 				e.printStackTrace();
 			}
 			
-		}else if(command.equals("/ReviewUpdate.re")) {
+		}
+		else if(command.equals("/ReviewUpdateAction.rev")) {
+			System.out.println("C : /ReviewUpdate.rev 호출");
+			
+			action = new ReviewUpdateAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+		else if(command.equals("/ReviewUpdateProAction.rev")) {
+			System.out.println("C : /ReviewUpdateAction.rev 호출");
+			
+			action = new ReviewUpdateProAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ReviewDeleteAction.rev")) {
+			System.out.println("C : /ReviewDeleteAction.rev 호출");
+			
+			action = new ReviewDeleteAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else if(command.equals("/ReviewListAction.rev")) {
+			System.out.println("C : /ReviewList.rev 호출");
+			
+			action = new ReviewListAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+//		else if(command.equals("/ReviewComment.rev")) {
+//			System.out.println("C : /reviewComment.rev 호출");
+//			
+//			forward = new ReviewForward();
+//			forward.setPath("./review/reviewComment.jsp");
+//			forward.setRedirect(false);
+//		}
+		else if(command.equals("/ReviewCommentAction.rev")){
+			System.out.println("C : /ReviewCommentAcion.rev 호출");
+			
+			action = new ReviewCommentAction();
+			
+			try {
+				forward = action.execute(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			
 		}
 		
+		System.out.println("C : 2. 가상주소 매핑 완료\n");
 		
 		// 3. 페이지 이동
 		if(forward != null) {
@@ -73,13 +148,13 @@ public class ReviewController extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Member - doGet()");
+		System.out.println("Review - doGet()");
 		doProcess(request, response);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Member - doPost()");
+		System.out.println("Review - doPost()");
 		doProcess(request, response);
 	}
 	

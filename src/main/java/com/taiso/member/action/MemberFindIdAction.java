@@ -4,7 +4,6 @@ import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.taiso.member.db.MemberDAO;
 import com.taiso.member.db.MemberDTO;
@@ -24,32 +23,34 @@ public class MemberFindIdAction implements Member {
 		MemberDAO mDAO = new MemberDAO();
 		MemberDTO mDTO = mDAO.memberFindId(mem_name,mem_email);
 		
-		System.out.println(" M : 아이디 찾기 필요 정보 : " +mDTO);
+		System.out.println(" M : 아이디 찾기 : " +mDTO);
 		
-		// 결과에 따른 페이지 이동(JS)	
+		// 정보 request 영역 저장
+		request.setAttribute("mDTO", mDTO);
+		
+		// 페이지 이동
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		if(mDTO != null) {
-			out.print("<script>");
-			out.print("	alert('"+mem_name+"님의 아이디는 "+mDTO.getMem_id()+"입니다.'); ");
-			out.print(" location.href='./MemberFindIdResult.me'; ");
-			out.print("</script>");
-			out.close();
+		MemberForward forward = new MemberForward();
+		
+		if(mDTO != null) {	
+			forward.setPath("member/memberFindIdResult.jsp");
+			forward.setRedirect(false);
 			
-			return null;	
+			return forward;
 			
-		}else { 
+		}else {
 			out.print("<script>");
-			out.print(" alert('아이디가 존재하지 않습니다.'); ");
-			out.print(" location.href='./MemberJoin.me'; ");
+			out.print(" alert('일치하는 정보가 없습니다.'); ");
+			out.print(" location.href='./MemberFindId.me'; ");
 			out.print("</script>");
 			out.close();
 			
 			return null;
+
 		}
-
 	}
-
+		
 }
 

@@ -16,7 +16,7 @@ public class MemberUpdateProAction implements Member {
 		System.out.println(" M : MemberUpdateProAction_execute() ");	
 		
 		// 전달된 데이터 저장(수정정보)
-		// 이름, 닉네임, 전화번호, 마케팅동의
+		// 아이디, 비밀번호, 이메일, 이름, 닉네임, 전화번호, 마케팅동의
 		MemberDTO mDTO = new MemberDTO();
 		
 		mDTO.setMem_id(request.getParameter("mem_id"));
@@ -64,7 +64,7 @@ public class MemberUpdateProAction implements Member {
 		}else { // result == 1
 			out.print("<script>");
 			out.print(" alert('회원정보 수정이 완료되었습니다.'); ");
-			out.print(" location.href='./MemberLogin.me'; ");
+			out.print(" location.href='./ReservationDate.rez'; ");
 			out.print("</script>");
 			out.close();
 			

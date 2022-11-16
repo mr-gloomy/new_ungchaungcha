@@ -126,7 +126,7 @@
                제목 : <input type="text" class="form-control" name="bo_title">
               </div>
               <div class="form-group">
-               문의사항 : <textarea name="bo_content" id="textarea" cols="30" rows="7" class="form-control"></textarea>
+               문의사항 : <textarea name="bo_content" id="textarea" cols="30" rows="7" class="form-control" ></textarea>
               </div>
               <div>
                첨부파일 : <input type="file" name="bo_file"/>

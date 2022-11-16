@@ -82,7 +82,7 @@ public class MemberDAO {
 			System.out.println(" DAO : mem_num : " +mem_num);
 			
 			// 3. 
-			sql = "insert into member(mem_num,mem_id,mem_pw,mem_name,mem_nickName,mem_email,mem_phone,mem_accept_sns,mem_registDate) values(?,?,?,?,?,?,?,?,now())";
+			sql = "insert into member(mem_num,mem_id,mem_pw,mem_name,mem_nickName,mem_email,mem_phone,mem_accept_sns,mem_registDate,mem_blacklist) values(?,?,?,?,?,?,?,?,now(),?)";
 			pstmt = con.prepareStatement(sql);
 			
 			// ??
@@ -94,6 +94,7 @@ public class MemberDAO {
 			pstmt.setString(6, mDTO.getMem_email());
 			pstmt.setString(7, mDTO.getMem_phone());
 			pstmt.setInt(8, mDTO.getMem_accept_sns());
+			pstmt.setString(9, mDTO.getMem_blacklist());
 			
 			// 4. 
 			pstmt.executeUpdate();

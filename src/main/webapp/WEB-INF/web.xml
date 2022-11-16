@@ -9,24 +9,6 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <servlet-name>ReviewController</servlet-name>
-    <servlet-class>com.taiso.review.action.ReviewController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>ReviewController</servlet-name>
-    <url-pattern>*.re</url-pattern>
-  </servlet-mapping>
-  
-  
-  <resource-ref>
-  	<description>project_taiso</description>
-  	<res-ref-name>jdbc/project_taiso</res-ref-name>
-  	<res-type>javax.sql.DataSource</res-type>
-  	<res-auth>Container</res-auth>
-  </resource-ref>
-  
-  
   <filter>
     <filter-name>Set Character Encoding</filter-name>
     <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
@@ -39,4 +21,14 @@
     <filter-name>Set Character Encoding</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
+      <!-- 커넥션풀 연결설정 -->
+  <resource-ref>
+	<description>TAISO DB Connect</description>
+	<res-ref-name>jdbc/taiso2</res-ref-name>  	
+	<res-type>javax.sql.DataSource</res-type>
+	<res-auth>Container</res-auth>
+  </resource-ref>
+  <!-- 커넥션풀 연결설정 -->
+  
 </web-app>

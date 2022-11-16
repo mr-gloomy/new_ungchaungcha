@@ -1,7 +1,6 @@
 package com.taiso.member.action;
 
 import javax.servlet.http.HttpServletRequest;
-
 import javax.servlet.http.HttpServletResponse;
 
 import com.taiso.member.db.MemberDAO;
@@ -24,10 +23,12 @@ public class MemberJoinAction implements Member {
 		mDTO.setMem_phone(request.getParameter("mem_phone"));
 		mDTO.setMem_email(request.getParameter("mem_email"));
 		mDTO.setMem_accept_sns(Integer.parseInt(request.getParameter("mem_accept_sns")));
+		mDTO.setMem_blacklist(request.getParameter("mem_blacklist"));
+		
 		
 		System.out.println(" M : mDTO : " +mDTO);
 		
-		// DAO 객체 생성 - 회원가입 메서드 호출
+		// DAO - 회원가입 메서드 호출
 		MemberDAO mDAO = new MemberDAO();
 		mDAO.memberJoin(mDTO);
 		System.out.println(" M : 회원가입 성공! ");
