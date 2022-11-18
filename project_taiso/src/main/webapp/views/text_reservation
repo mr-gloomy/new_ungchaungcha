@@ -1,0 +1,111 @@
+									[예약로직]
+									
+									
+1. ReservationDate								
+ 	[패턴3] : 메인페이지에서 보낸 예약 일시 정보를 차량페이지로 전달하기위해 DTO에 저장
+ 	
+ 	
+2. ReservationAction
+	[패턴3] : 차량페이지에서 보낸 차량 정보를 예약폼페이지로 전달하여 출력하기 위해 DTO에 저장
+			  메인페이지에서 보낸 예약 일시 정보도 같이 출력할 것 
+			  (rezDTO에 한 번 더 저장을 해야하는지, 아니면 바로 폼페이지에서 출력할 수 있는지 알아보기)
+									
+					
+									
+3. ReservationProAction
+	[패턴3] : 예약폼페이지에서 고객이 입력한 예약입력정보 저장하기 									
+					
+									
+4. ReservationListAction 									
+									
+									
+									
+									
+									
+									
+
+1. ReservationForm.re 가상주소를 클릭
+
+--------------------------------------------------------------------------------------------	
+2. ReservationController 로 이동해서 가상주소 매핑
+
+			if(command.equals("/Reservation.rez")) {		
+	2-1. [패턴 3] : DB사용 , view 페이지출력
+	
+	2-2. ReservationAction()객체 생성			
+			action = new ReservationAction();
+			
+			try {
+				forward  = action.execute(request, response);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}	
+		  }
+		  
+		 (*) Action 이용하여 정보들 가져온 후 Form으로 이동 
+		  
+---------------------------------------------------------------------------------------------	
+3. ReservationAction.java 파일 생성 (인터페이스Action 상속)
+			@Override
+			public ActionForward execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	
+	3-1. 회원만 예약할 수 있도록 로그인 제어하기 			
+				// 세션제어
+				HttpSession session = request.getSession();
+				String id = (String) session.getAttribute("id");
+ 
+	3-1-1. ActionForward 두 번 쓸거라 위에서 먼저 선언해주기
+				ActionForward forward = new ActionForward(); // 여기서 바로 움직일 수 있게 해야된다.
+				if(id == null) {
+					forward.setPath("./Main.me");
+					forward.setRedirect(true);		
+					return forward; // return 동작이 execute 문을 종료시킨다.
+				}
+	
+	3-2. 회원DAO로 가서 차량을 예약하려는 회원의 정보를 가져오기 			
+				// DAO - 기존의 회원정보 가져오기(getMember(ID))
+				MemberDAO dao = new MemberDAO();
+				MemberDTO dto = dao.getMember(id);
+				
+	3-3. reservationForm.jsp로 정보값을 넘기기위해 request 영역에 회원정보 저장				
+				// 정보 request 영역 저장
+				request.setAttribute("dto", dto); 
+	
+	3-4. rez(가상주소) -> .jsp (실제페이지)로 이동하기 때문에 false 			
+				// 페이지 이동
+				forward.setPath("./reservation/reservationForm.jsp");
+				forward.setRedirect(false);
+				
+				return forward;
+	3-5. return forward를 해줌으로써 이 정보들을 들고 컨트롤러 forward로 이동한다.
+			}
+
+---------------------------------------------------------------------------------------------		
+4. ReservationController에서 forward  = action.execute(request, response); 실행
+   4-1. 그리고 3단계를 통해 reservationForm.jsp로 이동
+   
+---------------------------------------------------------------------------------------------	 
+5. reservationForm.jsp 페이지
+   5-1. 예약정보 / 선택차량정보 받아온거 출력하기
+   5-2. 운전자정보 받아온거 출력하기
+   5-3. 면허정보는 여기서 입력하기
+   5-4. 자동차보험 선택하기 (필수)
+   5-5. 결제수단 (필수)
+   5-6. 결제정보 (필수)
+   		5-6-1. 대여요금 받아온거 출력하기
+   		5-6-2. 보험요금 5-4에서 선택한 대로 금액 출력하기
+   		5-6-3. 결제음액은 대여요금 + 보험요금
+   5-7. 약관동의 (필수)
+   5-8. 결제하기 버튼 -> 5-5에서 선택한 결제수단으로 api 적용
+   
+
+
+변경변경완료
+또 완료 페치 오류해결완료
+
+
+
+
+
+
+
